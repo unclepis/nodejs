@@ -26,7 +26,6 @@ basic concept for nodejs
 - 可以通过npm init命令对package.json文件进行初始化
 - node_modules中加载的包里面每一个都有一个package.json文件，用于定义包的属性
 - 属性说明:
-
   - name:包名称
   - version:包的版本
     - 版本号:
@@ -56,3 +55,10 @@ basic concept for nodejs
 2. npm adduser 在npm资源库中注册用户
 3. npm publish 发布模块/npm unpublish xxx@version可以撤销发布的版本
 ## nodejs  REPL交互式解释器
+- Node.js REPL(Read Eval Print Loop:交互式解释器) 表示一个电脑的环境，类似 Window 系统的终端或 Unix/Linux shell，我们可以在终端中输入命令，并接收系统的响应。
+- node自带交互解释器，可以执行：
+ 1.读取用户输入：解析输入了Javascript 数据结构并存储在内存中。
+ 2.执行输入的数据结构
+ 3.打印输出结构
+ 4.循环操作以上步骤知道用户点击两次ctrl+c退出
+- 开启node的终端输入node就可以像在浏览器的控制台一样进行输入了
