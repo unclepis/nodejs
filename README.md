@@ -26,9 +26,10 @@ basic concept for nodejs
 - 可以通过npm init命令对package.json文件进行初始化
 - node_modules中加载的包里面每一个都有一个package.json文件，用于定义包的属性
 - 属性说明:
-  - name :包名称
-  - version：包的版本
-    - 版本号：
+
+  - name:包名称
+  - version:包的版本
+    - 版本号:
     npm使用语义版本号来管理代码，简单的说语义版本号分为X,Y,Z三位，分别代表主版本号，次版本号和补丁版本号，当代码变更时，就会按照一下原则进行更新：
     1.如果只是更新了bug，需要更新z位置；
     2.如果时新增了功能，但是向下兼容，需要更新y位置；
