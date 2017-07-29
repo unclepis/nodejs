@@ -62,3 +62,23 @@ basic concept for nodejs
  3.打印输出结构
  4.循环操作以上步骤知道用户点击两次ctrl+c退出
 - 开启node的终端输入node就可以像在浏览器的控制台一样进行输入了
+### nodejs异步编程之回调函数
+- nodejs异步编程的直接体现就是回调，但是不能说回调后程序就异步化了
+- 回调函数在完成任务之后就被调用，node使用了大量的回调函数，node所有的api都支持回调函数
+- 这样在执行代码时就没有阻塞或等待文件i/o操作，极大提高了nodejs的性能，可以处理大量的并发请求。
+ ~~~
+  // demo.txt
+  'This is a test'
+  // demo.js
+  var fs = require('fs');
+  var data = fs.readFile('demo.txt',function(err,res){
+    if(err)console.log(err);
+    else console.log(res.toString());
+  });
+  console.log('finish to read the file');
+  // shell 
+  node main.js
+  输出结果：先输出 ‘finish to read the file’
+          在输出 ‘This is a test’
+  说明非阻塞调用，不需要等待文件读取完，就这样就可以在读取文件时同时执行接下来的代码，大大提高了程序的性能
+ ~~~
