@@ -82,3 +82,36 @@ basic concept for nodejs
           在输出 ‘This is a test’
   说明非阻塞调用，不需要等待文件读取完，就这样就可以在读取文件时同时执行接下来的代码，大大提高了程序的性能
  ~~~
+ ## npm脚本
+ ### npm允许在package.json文件里面，使用srcipts字段定义脚本命令。
+ - 命令行下使用npm run xxx就可以执行在srcipts字段里面定义好的脚本
+ - 这些定义在package.json文件中的脚本就叫做npm脚本
+ - 优点: 1.项目的相关脚本可以放在一个地方；2.不同项目的脚本命令，只要功能相同，就可以有相同的对外接口，用户不需要制动怎么测试你的项目，只需要在想要执行测试的时候运行npm run test；3.可以利用npm提供的很多辅助功能
+ - 可以使用npm run查看所有的npm脚本命令
+
+ ### 原理
+ - 每当npm run运行，就会新建一个shell，在这个shell里面执行指定的脚本命令
+ - npm run新建的这个shell，会将当前目录的node_modules/.bin子目录加入PATH变量，执行结束后，再将PATH变量恢复原样。这意味着，当前目录的node_modules/.bin子目录里面的所有脚本，都可以直接用脚本的名称调用，不需要加上路径。
+ - 所以例如当前的项目的依赖里面有Mocha，你就可以在package.json文件的npm脚本中定义npm run test 执行 ‘mocha test’，而不用加载文件的路径‘./node_modules/.bin/mocha’
+ - 另外备注一下：./是指根目录，../指上层目录
+ 
+ ### 通配符
+ - ‘test’: '*/js' *表示任意文件名
+ - 'test':'**/*.js' **表示任意一层子目录
+ - ‘test’: 'test/\*.js' 如果要将通配符传入原始命令，防止被shell转义，需要将*转义
+ 
+ ### 传参
+ - 向npm传入参数，需要使用 -- 标明
+ 
+ ### 执行顺序
+ - 如果npm脚本里面需要执行多个任务，那么需要明确他们的顺序
+ - 同时并行执行使用&: npm run test1 & npm run test2
+ - 上一个执行完成成功，才执行下一个任务的继发执行使用&& : npm run test1 && npm run test2
+ 
+ ### 默认值
+ - 一般来说，npm脚本由用户提供，但是npm对两个脚本提供了默认值，也就是说这两个脚本不用定义,就可以直接使用：
+ 
+ ~~~
+ "start":"node server.js" //如果项目根目录下有server.js这个脚本 
+ "install":"node-gyp rebuild" // 如果项目下有binding.gyp文件
+ ~~~
